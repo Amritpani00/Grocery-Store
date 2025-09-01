@@ -35,13 +35,16 @@ public class DataSeeder {
 
             productRepository.saveAll(List.of(
                     Product.builder().name("Apple").description("Fresh red apples")
-                            .price(new BigDecimal("2.49")).categoryId(fruits.getId()).imageUrl("/images/apple.jpg").inStock(true).build(),
+                            .price(new BigDecimal("2.49")).categoryId(fruits.getId()).imageUrl("/images/apple.jpg").inStock(true)
+                            .isTopSeller(true).build(),
                     Product.builder().name("Banana").description("Sweet bananas")
-                            .price(new BigDecimal("1.29")).categoryId(fruits.getId()).imageUrl("/images/banana.jpg").inStock(true).build(),
+                            .price(new BigDecimal("1.29")).categoryId(fruits.getId()).imageUrl("/images/banana.jpg").inStock(true)
+                            .isNew(true).build(),
                     Product.builder().name("Milk").description("Whole milk 1L")
                             .price(new BigDecimal("0.99")).categoryId(dairy.getId()).imageUrl("/images/milk.jpg").inStock(true).build(),
                     Product.builder().name("Tomato").description("Juicy tomatoes")
-                            .price(new BigDecimal("1.99")).categoryId(vegetables.getId()).imageUrl("/images/tomato.jpg").inStock(true).build()
+                            .price(new BigDecimal("1.99")).discountPrice(new BigDecimal("1.49"))
+                            .categoryId(vegetables.getId()).imageUrl("/images/tomato.jpg").inStock(true).build()
             ));
         }
     }

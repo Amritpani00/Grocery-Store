@@ -6,6 +6,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 @CrossOrigin(origins = "*")
@@ -41,6 +43,21 @@ public class ProductController {
             result = productRepository.findAll(pageable);
         }
         return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/products/new")
+    public ResponseEntity<List<Product>> getNewProducts() {
+        return ResponseEntity.ok(productRepository.findByIsNew(true));
+    }
+
+    @GetMapping("/products/top-seller")
+    public ResponseEntity<List<Product>> getTopSellerProducts() {
+        return ResponseEntity.ok(productRepository.findByIsTopSeller(true));
+    }
+
+    @GetMapping("/products/discounted")
+    public ResponseEntity<List<Product>> getDiscountedProducts() {
+        return ResponseEntity.ok(productRepository.findByDiscountPriceNotNull());
     }
 }
 
