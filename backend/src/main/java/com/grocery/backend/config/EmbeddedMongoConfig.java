@@ -1,8 +1,5 @@
 package com.grocery.backend.config;
 
-import de.flapdoodle.embed.mongo.distribution.Version;
-import de.flapdoodle.embed.mongo.transitions.DownloadConfigBuilder;
-import de.flapdoodle.embed.process.config.store.HttpProxyFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

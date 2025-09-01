@@ -24,6 +24,9 @@ public class Product {
     private String imageUrl;
     private String categoryId;
     private BigDecimal price;
+    private BigDecimal discountPrice;
+    private boolean isNew;
+    private boolean isTopSeller;
     private boolean inStock;
 }
 

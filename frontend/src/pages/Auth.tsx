@@ -11,7 +11,8 @@ export default function Auth() {
 		e.preventDefault()
 		setError('')
 		const endpoint = mode === 'login' ? '/api/auth/login' : '/api/auth/register'
-		const body: any = { email, password }
+		type Body = { email: string, password: string, fullName?: string }
+		const body: Body = { email, password }
 		if (mode === 'register') body.fullName = fullName
 		const res = await fetch(endpoint, {
 			method: 'POST',
