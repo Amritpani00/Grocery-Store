@@ -9,6 +9,28 @@ services:
       - mongo-data:/data/db
     environment:
       MONGO_INITDB_DATABASE: grocery
+
+  backend:
+    build: ./backend
+    container_name: grocery-backend
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/grocery
+      - APP_SEED=true
+      - SERVER_PORT=8080
+      - JWT_SECRET=6b0c9a4e2f1d7c8b6a9e3f5c1d2b4a6f7e8d9c0b1a2f3e4d5c6b7a8f9e0d1c2
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongo
+
+  frontend:
+    build: ./frontend
+    container_name: grocery-frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+
 volumes:
   mongo-data:
 
