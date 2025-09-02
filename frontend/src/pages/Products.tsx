@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 
 interface Product {
 	id: string
@@ -13,15 +14,20 @@ export default function Products() {
 	const [products, setProducts] = useState<Product[]>([])
 	const [q, setQ] = useState('')
 	const [msg, setMsg] = useState('')
+	const [searchParams] = useSearchParams()
+	const categoryId = searchParams.get('categoryId')
 
 	useEffect(() => {
 		const ctrl = new AbortController()
-		fetch(`/api/products?q=${encodeURIComponent(q)}`, { signal: ctrl.signal })
+		const params = new URLSearchParams()
+		if (q) params.set('q', q)
+		if (categoryId) params.set('categoryId', categoryId)
+		fetch(`/api/products?${params.toString()}`, { signal: ctrl.signal })
 			.then(r => r.json())
 			.then(page => setProducts(page.content || []))
 			.catch(() => {})
 		return () => ctrl.abort()
-	}, [q])
+	}, [q, categoryId])
 
 	async function addToCart(productId: string) {
 		const token = localStorage.getItem('token')
