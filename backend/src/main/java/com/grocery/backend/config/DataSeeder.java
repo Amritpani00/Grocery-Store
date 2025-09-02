@@ -41,11 +41,30 @@ public class DataSeeder {
                     Product.builder().name("Banana").description("Sweet bananas")
                             .price(new BigDecimal("1.29")).categoryId(fruits.getId()).imageUrl("/images/banana.jpg").inStock(true)
                             .isNew(true).build(),
+                    Product.builder().name("Orange").description("Juicy oranges")
+                            .price(new BigDecimal("3.99")).discountPrice(new BigDecimal("3.49"))
+                            .categoryId(fruits.getId()).imageUrl("/images/orange.jpg").inStock(true).build(),
                     Product.builder().name("Milk").description("Whole milk 1L")
                             .price(new BigDecimal("0.99")).categoryId(dairy.getId()).imageUrl("/images/milk.jpg").inStock(true).build(),
+                    Product.builder().name("Cheese").description("Cheddar cheese")
+                            .price(new BigDecimal("5.99")).categoryId(dairy.getId()).imageUrl("/images/cheese.jpg").inStock(true).build(),
+                    Product.builder().name("Yogurt").description("Greek yogurt")
+                            .price(new BigDecimal("2.99")).categoryId(dairy.getId()).imageUrl("/images/yogurt.jpg").inStock(true).build(),
                     Product.builder().name("Tomato").description("Juicy tomatoes")
                             .price(new BigDecimal("1.99")).discountPrice(new BigDecimal("1.49"))
-                            .categoryId(vegetables.getId()).imageUrl("/images/tomato.jpg").inStock(true).build()
+                            .categoryId(vegetables.getId()).imageUrl("/images/tomato.jpg").inStock(true).build(),
+                    Product.builder().name("Carrot").description("Fresh carrots")
+                            .price(new BigDecimal("1.49")).categoryId(vegetables.getId()).imageUrl("/images/carrot.jpg").inStock(true).build(),
+                    Product.builder().name("Broccoli").description("Fresh broccoli")
+                            .price(new BigDecimal("2.99")).categoryId(vegetables.getId()).imageUrl("/images/broccoli.jpg").inStock(true).build(),
+                    Product.builder().name("Bread").description("Whole wheat bread")
+                            .price(new BigDecimal("3.49")).categoryId(bakery.getId()).imageUrl("/images/bread.jpg").inStock(true).build(),
+                    Product.builder().name("Croissant").description("Buttery croissant")
+                            .price(new BigDecimal("2.99")).discountPrice(new BigDecimal("2.49"))
+                            .categoryId(bakery.getId()).imageUrl("/images/croissant.jpg").inStock(true).build(),
+                    Product.builder().name("Muffin").description("Blueberry muffin")
+                            .price(new BigDecimal("1.99")).categoryId(bakery.getId()).imageUrl("/images/muffin.jpg").inStock(true)
+                            .isNew(true).build()
             ));
         }
         if (bannerRepository.count() == 0) {
