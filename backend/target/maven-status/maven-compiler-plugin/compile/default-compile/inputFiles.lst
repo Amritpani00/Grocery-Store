@@ -11,6 +11,9 @@
 /app/backend/src/main/java/com/grocery/backend/order/Order.java
 /app/backend/src/main/java/com/grocery/backend/order/OrderController.java
 /app/backend/src/main/java/com/grocery/backend/order/OrderRepository.java
+/app/backend/src/main/java/com/grocery/backend/product/Banner.java
+/app/backend/src/main/java/com/grocery/backend/product/BannerController.java
+/app/backend/src/main/java/com/grocery/backend/product/BannerRepository.java
 /app/backend/src/main/java/com/grocery/backend/product/Category.java
 /app/backend/src/main/java/com/grocery/backend/product/CategoryRepository.java
 /app/backend/src/main/java/com/grocery/backend/product/Product.java
