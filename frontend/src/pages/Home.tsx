@@ -33,9 +33,9 @@ export default function Home() {
 
 			{discounted.length > 0 && (
 				<section>
-					<h2 className="text-2xl font-bold mb-4">Today's Discounts</h2>
+					<h2 className="text-2xl font-bold mb-4">Festival in 10% discount</h2>
 					<div className="relative">
-						<div className="flex gap-4 overflow-x-auto">
+						<div className="flex gap-4 overflow-x-auto snap-x snap-mandatory py-4">
 							{discounted.map(product => (
 								<ProductCard key={product.id} product={product} />
 							))}
@@ -47,7 +47,7 @@ export default function Home() {
 			{newProducts.length > 0 && (
 				<section>
 					<h2 className="text-2xl font-bold mb-4">New Launches</h2>
-					<div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+					<div className="flex gap-4 overflow-x-auto snap-x snap-mandatory py-4">
 						{newProducts.map(product => (
 							<ProductCard key={product.id} product={product} />
 						))}
@@ -58,7 +58,7 @@ export default function Home() {
 			{topSellers.length > 0 && (
 				<section>
 					<h2 className="text-2xl font-bold mb-4">Super Sellers</h2>
-					<div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+					<div className="flex gap-4 overflow-x-auto snap-x snap-mandatory py-4">
 						{topSellers.map(product => (
 							<ProductCard key={product.id} product={product} />
 						))}
@@ -71,7 +71,7 @@ export default function Home() {
 
 function ProductCard({ product }: { product: Product }) {
 	return (
-		<div className="bg-white border rounded-lg overflow-hidden flex-shrink-0" style={{ width: '200px' }}>
+		<div className="bg-white border rounded-lg overflow-hidden flex-shrink-0 snap-center" style={{ width: '200px' }}>
 			<img src={product.imageUrl} alt={product.name} className="w-full h-32 object-cover" />
 			<div className="p-3">
 				<h3 className="font-bold">{product.name}</h3>
