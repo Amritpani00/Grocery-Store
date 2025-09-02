@@ -41,12 +41,7 @@ export default function Home() {
 	}, [])
 
 	useEffect(() => {
-		if (banners.length > 1) {
-			const interval = setInterval(() => {
-				setCurrentBanner(prev => (prev + 1) % banners.length)
-			}, 5000)
-			return () => clearInterval(interval)
-		}
+		// Removed interval logic
 	}, [banners.length])
 
 	async function addToCart(productId: string) {
@@ -70,36 +65,21 @@ export default function Home() {
 			{msg && <div className="text-sm text-emerald-700">{msg}</div>}
 			{banners.length > 0 && (
 				<section className="relative">
-					<div
-						className="bg-emerald-600 text-white rounded-2xl p-10 bg-cover bg-center"
-						style={{ backgroundImage: `url(${banners[currentBanner].imageUrl})` }}
-					>
-						<h1 className="text-3xl font-bold">{banners[currentBanner].title}</h1>
-						<p className="mt-2 text-emerald-100">{banners[currentBanner].subtitle}</p>
-						<div className="mt-6">
-							<Link to={banners[currentBanner].link} className="px-4 py-2 bg-white text-emerald-700 rounded-md font-medium">Shop now</Link>
-						</div>
+					<div className="flex gap-4 overflow-x-auto snap-x snap-mandatory py-4">
+						{banners.map(banner => (
+							<div
+								key={banner.id}
+								className="bg-emerald-600 text-white rounded-2xl p-10 bg-cover bg-center flex-shrink-0 snap-center"
+								style={{ backgroundImage: `url(${banner.imageUrl})`, width: '400px', height: '200px' }}
+							>
+								<h1 className="text-3xl font-bold">{banner.title}</h1>
+								<p className="mt-2 text-emerald-100">{banner.subtitle}</p>
+								<div className="mt-6">
+									<Link to={banner.link} className="px-4 py-2 bg-white text-emerald-700 rounded-md font-medium">Shop now</Link>
+								</div>
+							</div>
+						))}
 					</div>
-					{banners.length > 1 && (
-						<>
-							<button
-								onClick={() => setCurrentBanner(prev => (prev - 1 + banners.length) % banners.length)}
-								className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/50 rounded-full p-2 hover:bg-white"
-							>
-								<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-								</svg>
-							</button>
-							<button
-								onClick={() => setCurrentBanner(prev => (prev + 1) % banners.length)}
-								className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/50 rounded-full p-2 hover:bg-white"
-							>
-								<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-								</svg>
-							</button>
-						</>
-					)}
 				</section>
 			)}
 

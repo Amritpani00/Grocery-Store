@@ -18,5 +18,5 @@ app:
   jwt:
     secret: ${JWT_SECRET:6b0c9a4e2f1d7c8b6a9e3f5c1d2b4a6f7e8d9c0b1a2f3e4d5c6b7a8f9e0d1c2}
     expirationMs: 604800000 # 7 days
-  seed: ${APP_SEED:false}
+  seed: ${APP_SEED:true}
 

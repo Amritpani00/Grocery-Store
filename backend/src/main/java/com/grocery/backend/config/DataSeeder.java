@@ -42,6 +42,16 @@ public class DataSeeder {
                             .price(new BigDecimal("2.49")).categoryId(grocery.getId()).imageUrl("/images/pasta.jpg").inStock(true).build(),
                     Product.builder().name("Olive Oil").description("Extra virgin olive oil 500ml")
                             .price(new BigDecimal("7.99")).categoryId(grocery.getId()).imageUrl("/images/olive-oil.jpg").inStock(true).build(),
+                    Product.builder().name("Lentils").description("Red lentils 1kg")
+                            .price(new BigDecimal("4.99")).categoryId(grocery.getId()).imageUrl("/images/lentils.jpg").inStock(true).build(),
+                    Product.builder().name("Flour").description("All-purpose flour 1kg")
+                            .price(new BigDecimal("3.49")).categoryId(grocery.getId()).imageUrl("/images/flour.jpg").inStock(true).build(),
+                    Product.builder().name("Ghee").description("Pure cow ghee 500g")
+                            .price(new BigDecimal("12.99")).categoryId(grocery.getId()).imageUrl("/images/ghee.jpg").inStock(true).build(),
+                    Product.builder().name("Sugar").description("Refined sugar 1kg")
+                            .price(new BigDecimal("2.99")).categoryId(grocery.getId()).imageUrl("/images/sugar.jpg").inStock(true).build(),
+                    Product.builder().name("Besan").description("Gram flour 1kg")
+                            .price(new BigDecimal("4.49")).categoryId(grocery.getId()).imageUrl("/images/besan.jpg").inStock(true).build(),
                     Product.builder().name("Apple").description("Fresh red apples")
                             .price(new BigDecimal("2.49")).categoryId(fruits.getId()).imageUrl("/images/apple.jpg").inStock(true)
                             .isTopSeller(true).build(),
@@ -77,8 +87,9 @@ public class DataSeeder {
         if (bannerRepository.count() == 0) {
             bannerRepository.saveAll(List.of(
                     Banner.builder().title("Fresh groceries delivered to your door").subtitle("Browse products, add to cart, checkout and track your delivery in real time.").imageUrl("/images/banner1.jpg").link("/products").build(),
-                    Banner.builder().title("Festival Season Offer").subtitle("Get up to 20% off on selected items.").imageUrl("/images/banner2.jpg").link("/products/discounted").build(),
-                    Banner.builder().title("10% Discount on all vegetables").subtitle("Fresh from the farm.").imageUrl("/images/banner3.jpg").link("/products?categoryId=vegetables").build()
+                    Banner.builder().title("Festival Season Offer").subtitle("Get 10% off on selected items.").imageUrl("/images/banner2.jpg").link("/products/discounted").build(),
+                    Banner.builder().title("10% Discount on all vegetables").subtitle("Fresh from the farm.").imageUrl("/images/banner3.jpg").link("/products?categoryId=vegetables").build(),
+                    Banner.builder().title("Diwali Season Special").subtitle("Get 20% off on all sweets.").imageUrl("/images/banner4.jpg").link("/products").build()
             ));
         }
     }
