@@ -15,11 +15,21 @@ interface Category {
 	name: string;
 }
 
+interface Banner {
+	id: string;
+	title: string;
+	subtitle: string;
+	imageUrl: string;
+	link: string;
+}
+
 export default function Home() {
 	const [discounted, setDiscounted] = useState<Product[]>([])
 	const [newProducts, setNewProducts] = useState<Product[]>([])
 	const [topSellers, setTopSellers] = useState<Product[]>([])
 	const [categories, setCategories] = useState<Category[]>([])
+	const [banners, setBanners] = useState<Banner[]>([])
+	const [currentBanner, setCurrentBanner] = useState(0)
 	const [msg, setMsg] = useState('')
 
 	useEffect(() => {
@@ -27,7 +37,17 @@ export default function Home() {
 		fetch('/api/products/new').then(res => res.json()).then(setNewProducts)
 		fetch('/api/products/top-seller').then(res => res.json()).then(setTopSellers)
 		fetch('/api/categories').then(res => res.json()).then(setCategories)
+		fetch('/api/banners').then(res => res.json()).then(setBanners)
 	}, [])
+
+	useEffect(() => {
+		if (banners.length > 1) {
+			const interval = setInterval(() => {
+				setCurrentBanner(prev => (prev + 1) % banners.length)
+			}, 5000)
+			return () => clearInterval(interval)
+		}
+	}, [banners.length])
 
 	async function addToCart(productId: string) {
 		const token = localStorage.getItem('token')
@@ -48,23 +68,15 @@ export default function Home() {
 	return (
 		<div className="space-y-10">
 			{msg && <div className="text-sm text-emerald-700">{msg}</div>}
-			<section className="bg-emerald-600 text-white rounded-2xl p-10">
-				<h1 className="text-3xl font-bold">Fresh groceries delivered to your door</h1>
-				<p className="mt-2 text-emerald-100">Browse products, add to cart, checkout and track your delivery in real time.</p>
-				<div className="mt-6">
-					<Link to="/products" className="px-4 py-2 bg-white text-emerald-700 rounded-md font-medium">Shop now</Link>
-				</div>
-			</section>
-
-			{categories.length > 0 && (
-				<section>
-					<h2 className="text-2xl font-bold mb-4">Shop by Category</h2>
-					<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-						{categories.map(category => (
-							<Link key={category.id} to={`/products?categoryId=${category.id}`} className="bg-gray-100 p-4 rounded-lg text-center font-medium hover:bg-gray-200">
-								{category.name}
-							</Link>
-						))}
+			{banners.length > 0 && (
+				<section
+					className="bg-emerald-600 text-white rounded-2xl p-10 bg-cover bg-center"
+					style={{ backgroundImage: `url(${banners[currentBanner].imageUrl})` }}
+				>
+					<h1 className="text-3xl font-bold">{banners[currentBanner].title}</h1>
+					<p className="mt-2 text-emerald-100">{banners[currentBanner].subtitle}</p>
+					<div className="mt-6">
+						<Link to={banners[currentBanner].link} className="px-4 py-2 bg-white text-emerald-700 rounded-md font-medium">Shop now</Link>
 					</div>
 				</section>
 			)}
@@ -119,6 +131,19 @@ export default function Home() {
 					<div className="flex gap-4 overflow-x-auto snap-x snap-mandatory py-4">
 						{topSellers.map(product => (
 							<ProductCard key={product.id} product={product} onAddToCart={addToCart} />
+						))}
+					</div>
+				</section>
+			)}
+
+			{categories.length > 0 && (
+				<section>
+					<h2 className="text-2xl font-bold mb-4">Shop by Category</h2>
+					<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+						{categories.map(category => (
+							<Link key={category.id} to={`/products?categoryId=${category.id}`} className="bg-gray-100 p-4 rounded-lg text-center font-medium hover:bg-gray-200">
+								{category.name}
+							</Link>
 						))}
 					</div>
 				</section>
