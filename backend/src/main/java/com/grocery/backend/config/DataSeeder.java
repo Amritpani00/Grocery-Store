@@ -33,8 +33,15 @@ public class DataSeeder {
             Category vegetables = categoryRepository.save(Category.builder().name("Vegetables").slug("vegetables").build());
             Category dairy = categoryRepository.save(Category.builder().name("Dairy").slug("dairy").build());
             Category bakery = categoryRepository.save(Category.builder().name("Bakery").slug("bakery").build());
+            Category grocery = categoryRepository.save(Category.builder().name("Grocery").slug("grocery").build());
 
             productRepository.saveAll(List.of(
+                    Product.builder().name("Rice").description("Basmati rice 1kg")
+                            .price(new BigDecimal("9.99")).categoryId(grocery.getId()).imageUrl("/images/rice.jpg").inStock(true).build(),
+                    Product.builder().name("Pasta").description("Penne pasta 500g")
+                            .price(new BigDecimal("2.49")).categoryId(grocery.getId()).imageUrl("/images/pasta.jpg").inStock(true).build(),
+                    Product.builder().name("Olive Oil").description("Extra virgin olive oil 500ml")
+                            .price(new BigDecimal("7.99")).categoryId(grocery.getId()).imageUrl("/images/olive-oil.jpg").inStock(true).build(),
                     Product.builder().name("Apple").description("Fresh red apples")
                             .price(new BigDecimal("2.49")).categoryId(fruits.getId()).imageUrl("/images/apple.jpg").inStock(true)
                             .isTopSeller(true).build(),

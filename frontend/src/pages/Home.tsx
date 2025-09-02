@@ -69,15 +69,37 @@ export default function Home() {
 		<div className="space-y-10">
 			{msg && <div className="text-sm text-emerald-700">{msg}</div>}
 			{banners.length > 0 && (
-				<section
-					className="bg-emerald-600 text-white rounded-2xl p-10 bg-cover bg-center"
-					style={{ backgroundImage: `url(${banners[currentBanner].imageUrl})` }}
-				>
-					<h1 className="text-3xl font-bold">{banners[currentBanner].title}</h1>
-					<p className="mt-2 text-emerald-100">{banners[currentBanner].subtitle}</p>
-					<div className="mt-6">
-						<Link to={banners[currentBanner].link} className="px-4 py-2 bg-white text-emerald-700 rounded-md font-medium">Shop now</Link>
+				<section className="relative">
+					<div
+						className="bg-emerald-600 text-white rounded-2xl p-10 bg-cover bg-center"
+						style={{ backgroundImage: `url(${banners[currentBanner].imageUrl})` }}
+					>
+						<h1 className="text-3xl font-bold">{banners[currentBanner].title}</h1>
+						<p className="mt-2 text-emerald-100">{banners[currentBanner].subtitle}</p>
+						<div className="mt-6">
+							<Link to={banners[currentBanner].link} className="px-4 py-2 bg-white text-emerald-700 rounded-md font-medium">Shop now</Link>
+						</div>
 					</div>
+					{banners.length > 1 && (
+						<>
+							<button
+								onClick={() => setCurrentBanner(prev => (prev - 1 + banners.length) % banners.length)}
+								className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/50 rounded-full p-2 hover:bg-white"
+							>
+								<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+								</svg>
+							</button>
+							<button
+								onClick={() => setCurrentBanner(prev => (prev + 1) % banners.length)}
+								className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/50 rounded-full p-2 hover:bg-white"
+							>
+								<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+								</svg>
+							</button>
+						</>
+					)}
 				</section>
 			)}
 
